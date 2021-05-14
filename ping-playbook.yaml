@@ -1,0 +1,10 @@
+- name: test playbook
+  hosts: vm1,vm2
+
+  tasks:
+  - name: ping
+    ping:
+    register: result
+  - name: print ping data
+    debug:
+      var: result		

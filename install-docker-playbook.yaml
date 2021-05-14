@@ -1,0 +1,23 @@
+- name: install docker
+  hosts: vm1,vm2
+  gather_facts: false
+
+  tasks:
+  - name: ping
+    ping:
+    register: result
+  - name: install-docker
+    become: yes
+    apt:
+      name: docker.io
+      state: absent
+  - name: install docker-compose
+    become: yes
+    apt:
+      name: docker-compose
+      state: present
+  - name: ensure docker service is running
+    become: yes
+    service:
+      name: docker
+      state: started
